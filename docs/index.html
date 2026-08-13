@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>B1 · Protein–ligand cofolding confidence on Runs N' Poses degrades under ligand-similarity shift</title>
+  <meta name="description" content="Journal companion: protein–ligand pose, pocket, and task — cofolding confidence under ligand-similarity shift.">
+  <meta name="author" content="Zeyu Fu">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="canonical" href="https://peterponyu.github.io/b1-site/">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/site.css">
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="preview-banner"><strong>Preview.</strong> Companion leaf only — not a live github.io URL. Archive DOI is Zenodo until an article DOI exists. Site badge omitted.</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="./">B1<span>cofolding</span></a>
+      <nav class="nav-ia" aria-label="Primary">
+          <a href="./" aria-current="page">Home</a>
+          <a href="./abstract/">Abstract</a>
+          <a href="./figures/">Figures</a>
+          <a href="./code/">Code</a>
+          <a href="./cite/">Cite</a>
+      </nav>
+      <div class="chrome-links">
+        <a class="chrome-link" href="https://peterponyu.github.io/">Homepage</a>
+        <a class="chrome-link" href="https://peterponyu.github.io/scportal/">SCPortal</a>
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Open section menu" aria-controls="mobile-panel" aria-expanded="false">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-panel" id="mobile-panel" aria-hidden="true">
+          <a href="./" aria-current="page">Home</a>
+          <a href="./abstract/">Abstract</a>
+          <a href="./figures/">Figures</a>
+          <a href="./code/">Code</a>
+          <a href="./cite/">Cite</a>
+    </div>
+  </header>
+  <main id="main" class="fade-in">
+
+    <section class="hero">
+      <div>
+        <p class="kicker">ZF Lab · cofolding reliability <span class="venue">· JCIM intended</span></p>
+        <h1>Protein–ligand cofolding confidence on Runs N' Poses degrades under ligand-similarity shift</h1>
+        <p class="lead">The object is the deposited pose, the pocket, and the task — ligand RMSD versus interface DockQ versus affinity — not an ECE fold-change. Three audited complexes at similar Boltz-2 confidence give opposite poses.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="./abstract/">Read the abstract</a>
+          <a class="btn btn-ghost" href="./figures/">Browse figures</a>
+          <a class="btn btn-ghost" href="https://doi.org/10.5281/zenodo.21870002">Zenodo archive</a>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-tile"><strong>3</strong><span>audited complexes · <span class="mono">8e5i</span> / <span class="mono">8og8</span> / <span class="mono">8q0u</span></span></div>
+        <div class="stat-tile"><strong>8</strong><span>cofolding models on Runs N' Poses (secondary analysis)</span></div>
+        <div class="stat-tile"><strong>182</strong><span>post-cutoff Boltz-2 systems for pocket occupancy (Fig 8 A–C only)</span></div>
+      </div>
+    </section>
+
+    <section class="stack">
+      <p class="section-kicker">Physical object</p>
+      <h2 class="section-title">One complex, one pose, one claim</h2>
+      <div class="pose-grid">
+        <article class="pose-card">
+          <div class="pdb">8e5i</div>
+          <span class="chip chip-ok">training-similar · pose holds</span>
+          <p>FMN. Tanimoto 1.00. Boltz-2 score 0.98, ligand RMSD 0.15 Å versus the deposited pose. Not in the Vina subset.</p>
+        </article>
+        <article class="pose-card">
+          <div class="pdb">8og8</div>
+          <span class="chip chip-fail">no analog · pose fails</span>
+          <p>VM8. No training analog. Score 0.93 but RMSD 6.3 Å. Known-pocket Vina redock 0.8 Å (within 2 Å).</p>
+        </article>
+        <article class="pose-card">
+          <div class="pdb">8q0u</div>
+          <span class="chip chip-fail">dissimilar · pose fails</span>
+          <p>IKG. Tanimoto 0.20. Score 0.96 but RMSD 15.6 Å. Known-pocket Vina redock 1.7 Å.</p>
+        </article>
+      </div>
+      <figure class="card hero-figure">
+        <img src="./media/F_case_study.png" width="1600" height="900" alt="Three 2D ligand cards: 8e5i succeeds at 0.15 Å, 8og8 and 8q0u fail at 6.3 Å and 15.6 Å while Boltz-2 scores stay high; Vina redock succeeds on the two hard examples.">
+        <figcaption>Fig 1 case cards (2D ligands). Opposite poses at similar confidence. Pocket stills are on the Figures page (four-panel F1).</figcaption>
+      </figure>
+    </section>
+
+    <section class="stack">
+      <p class="section-kicker">Publication</p>
+      <h2 class="section-title">Paper card</h2>
+      <article class="paper-card">
+        <span class="disc" aria-hidden="true">01</span>
+        <div>
+          <h2>Protein–ligand cofolding confidence on Runs N' Poses degrades under ligand-similarity shift</h2>
+          <p class="meta"><strong>Zeyu Fu</strong> · <em>J. Chem. Inf. Model.</em> (intended)</p>
+          <div class="badge-row">
+            <a class="badge" href="https://doi.org/10.5281/zenodo.21870002">Archive DOI</a>
+            <span class="badge badge-disabled" title="No public HTTPS repository">Code</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="stack">
+      <p class="section-kicker">Pick a route</p>
+      <h2 class="section-title">01 Abstract · 02 Figures · 03 Code · 04 Cite</h2>
+      <div class="route-grid">
+        <a class="route-card" href="./abstract/">
+          <span class="disc disc-lg">01</span>
+          <div>
+            <h3>Abstract</h3>
+            <p>Standalone JCIM abstract. No figure pointers. Calibration claim stays scoped to similarity bins, not a mixed ECE envelope.</p>
+          </div>
+        </a>
+        <a class="route-card" href="./figures/">
+          <span class="disc disc-lg">02</span>
+          <div>
+            <h3>Figures</h3>
+            <p>Object gallery: pose (F1), pocket control (F5), pocket novelty (F8 A–C), task switch (F13). Spearman/AUROC panels labeled as controls.</p>
+          </div>
+        </a>
+        <a class="route-card" href="./code/">
+          <span class="disc disc-lg">03</span>
+          <div>
+            <h3>Code</h3>
+            <p>No public GitHub. Analysis archive on Zenodo. Code on request.</p>
+          </div>
+        </a>
+        <a class="route-card" href="./cite/">
+          <span class="disc disc-lg">04</span>
+          <div>
+            <h3>Cite</h3>
+            <p>Pre-publication stub plus the Zenodo software DOI. Article @article after acceptance.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <h2>B1</h2>
+        <p>Journal companion for protein–ligand cofolding confidence. Physical object: pose, pocket occupancy, and task type.</p>
+      </div>
+      <div>
+        <h2>Browse</h2>
+        <ul>
+          <li><a class="footer-link" href="./">Home</a></li>
+          <li><a class="footer-link" href="./abstract/">Abstract</a></li>
+          <li><a class="footer-link" href="./figures/">Figures</a></li>
+          <li><a class="footer-link" href="./code/">Code</a></li>
+          <li><a class="footer-link" href="./cite/">Cite</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Lab</h2>
+        <ul>
+          <li><a class="footer-link" href="https://peterponyu.github.io/">Homepage</a></li>
+          <li><a class="footer-link" href="https://peterponyu.github.io/scportal/">SCPortal</a></li>
+          <li><a class="footer-link" href="https://orcid.org/0009-0001-8329-0108">ORCID</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Archive</h2>
+        <ul>
+          <li><a class="footer-link" href="https://doi.org/10.5281/zenodo.21870002">Zenodo 10.5281/zenodo.21870002</a></li>
+        </ul>
+        <p>No public code remote. Private workbench URLs are not listed.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="./assets/site.js"></script>
+</body>
+</html>

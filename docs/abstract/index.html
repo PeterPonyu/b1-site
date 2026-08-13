@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abstract · B1 cofolding confidence</title>
+  <meta name="description" content="Standalone abstract for the B1 cofolding-confidence manuscript.">
+  <meta name="author" content="Zeyu Fu">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="abstract">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="preview-banner"><strong>Preview.</strong> Companion leaf only — not a live github.io URL. Archive DOI is Zenodo until an article DOI exists. Site badge omitted.</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="../">B1<span>cofolding</span></a>
+      <nav class="nav-ia" aria-label="Primary">
+          <a href="../">Home</a>
+          <a href="../abstract/" aria-current="page">Abstract</a>
+          <a href="../figures/">Figures</a>
+          <a href="../code/">Code</a>
+          <a href="../cite/">Cite</a>
+      </nav>
+      <div class="chrome-links">
+        <a class="chrome-link" href="https://peterponyu.github.io/">Homepage</a>
+        <a class="chrome-link" href="https://peterponyu.github.io/scportal/">SCPortal</a>
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Open section menu" aria-controls="mobile-panel" aria-expanded="false">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-panel" id="mobile-panel" aria-hidden="true">
+          <a href="../">Home</a>
+          <a href="../abstract/" aria-current="page">Abstract</a>
+          <a href="../figures/">Figures</a>
+          <a href="../code/">Code</a>
+          <a href="../cite/">Cite</a>
+    </div>
+  </header>
+  <main id="main" class="fade-in">
+
+    <p class="kicker">Abstract <span class="venue">· ACS J. Chem. Inf. Model. (intended)</span></p>
+    <h1>Abstract</h1>
+    <p class="lead">Standalone manuscript abstract. No figure or table pointers. Fallback venue is JCAMD if JCIM does not take the paper.</p>
+    <div class="prose">
+      <p>All-atom protein–ligand cofolding models (AlphaFold 3, Boltz, Chai, Protenix) emit a per-prediction confidence score that is increasingly used for go/no-go decisions in structure-based molecular modeling, yet whether that confidence remains trustworthy under benchmark-defined ligand-similarity shift is a narrower question than the already-published memorization result. By secondary analysis of the published Runs N' Poses predictions across eight cofolding models, we show that cofolding confidence is substantially better calibrated where the ligand resembles training data and degrades under benchmark-defined ligand-similarity shift.</p>
+      <p>First, we reproduce the source benchmark’s central result: pose-prediction success rises with similarity-to-training (Spearman 0.31–0.41 across all eight models). Second — our principal contribution — the confidence score does not track that decline: per-bin affine-rescaled score reliability diagnostics are substantially worse off-manifold (<code>sim_low</code> ECE is 5.0–8.9× <code>sim_high</code> ECE; no-analog/high ECE is 3.7–7.3×), and a confidence threshold tuned to 90% precision on training-similar ligands delivers only 49–66% precision on dissimilar ligands (precision drop +0.24 to +0.41; all seven bootstrap 95% confidence intervals exclude zero and survive Holm–Bonferroni multiplicity correction), a non-transfer that persists at 0.50–0.66 held-out precision under repeated protein-cluster threshold selection.</p>
+      <p>This pattern is not explained by a base-rate artifact alone: in a fixed absolute high-confidence band, at matched mean confidence (within 0.002), pose-prediction success still differs by 26.9–45.8 percentage points between training-similar and dissimilar ligands (the gap persists at a stricter within-model top-confidence-decile band for six of seven models, and for the seventh, Boltz-2, the base-rate refutation is carried instead by the score-stratified and threshold-transfer controls). Third, a non-cofolding docking control — re-docking the same ligands with AutoDock Vina — shows no statistically detectable success-vs-similarity trend in this known-pocket redocking control (Spearman −0.06, 95% CI ∋ 0) while the learned models show a strong one, a double dissociation (known-pocket redocking control, an easier task than blind cofolding) supporting a memorization-associated interpretation of the cofolding degradation rather than an explanation based solely on intrinsic target/ligand difficulty (robust to a ligand-complexity partial-correlation control).</p>
+      <p>The same memorization signature recurs in protein–ligand affinity scoring. Finally, in a pilot-scale original-prediction extension — Boltz-2 run in-house on 182 drug-like systems released after its training cutoff — the decoupling reproduces on never-trained data: systems with a novel binding pocket (no training-similar pocket) succeed far less often than pocket-similar systems (0.09 vs 0.49; seen−novel gap +0.40, 95% CI [0.28, 0.51]) at essentially unchanged confidence. On this pilot slice the pocket is the candidate operative novelty axis (ligand-Tanimoto shows a reverse/confounded sign; protein-sequence novelty is saturated); this pocket mechanism complements, and does not replace, the multi-model ligand-similarity primary frame on Runs N' Poses. Practitioners should not assume that a single cofolding confidence threshold transfers from training-similar to ligand-dissimilar regimes; confidence-based abstention should be calibrated and reported per novelty regime for retrospective molecular-modeling use.</p>
+    </div>
+    <p class="note">Zeyu Fu. ORCID <a href="https://orcid.org/0009-0001-8329-0108">0009-0001-8329-0108</a>. Army Medical University. No article DOI yet — cite the <a href="https://doi.org/10.5281/zenodo.21870002">Zenodo archive</a>.</p>
+
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <h2>B1</h2>
+        <p>Journal companion for protein–ligand cofolding confidence. Physical object: pose, pocket occupancy, and task type.</p>
+      </div>
+      <div>
+        <h2>Browse</h2>
+        <ul>
+          <li><a class="footer-link" href="../">Home</a></li>
+          <li><a class="footer-link" href="../abstract/">Abstract</a></li>
+          <li><a class="footer-link" href="../figures/">Figures</a></li>
+          <li><a class="footer-link" href="../code/">Code</a></li>
+          <li><a class="footer-link" href="../cite/">Cite</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Lab</h2>
+        <ul>
+          <li><a class="footer-link" href="https://peterponyu.github.io/">Homepage</a></li>
+          <li><a class="footer-link" href="https://peterponyu.github.io/scportal/">SCPortal</a></li>
+          <li><a class="footer-link" href="https://orcid.org/0009-0001-8329-0108">ORCID</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Archive</h2>
+        <ul>
+          <li><a class="footer-link" href="https://doi.org/10.5281/zenodo.21870002">Zenodo 10.5281/zenodo.21870002</a></li>
+        </ul>
+        <p>No public code remote. Private workbench URLs are not listed.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/site.js"></script>
+</body>
+</html>
