@@ -58,30 +58,32 @@ jobs:
         if: always()
         run: |
           if [ -f test-results/results.json ]; then
-            node - <<'NODE'
-            import fs from 'node:fs';
-            const data = JSON.parse(fs.readFileSync('test-results/results.json', 'utf8'));
-            const failed = (data.suites ?? []).flatMap(function walk(suite) {
-              const nested = (suite.suites ?? []).flatMap(walk);
-              const specs = (suite.specs ?? []).flatMap((spec) =>
-                (spec.tests ?? []).filter((t) => t.status === 'unexpected').map((t) => ({
-                  title: [...(spec.titlePath ?? []), spec.title].filter(Boolean).join(' › '),
-                  error: t.results?.[0]?.error?.message ?? 'failed',
-                })),
-              );
-              return nested.concat(specs);
-            });
-            const lines = ['## LAPS gateway policy failures', ''];
-            if (failed.length === 0) {
-              lines.push('All browser policy checks passed.');
-            } else {
-              for (const item of failed) {
-                lines.push(`- **${item.title}**`);
-                lines.push(`  - ${String(item.error).split('\n')[0]}`);
+            node --input-type=module -e "
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync('test-results/results.json', 'utf8'));
+          const failed = [];
+          function walk(suite, path = []) {
+            for (const nested of suite.suites ?? []) walk(nested, [...path, nested.title]);
+            for (const spec of suite.specs ?? []) {
+              for (const t of spec.tests ?? []) {
+                if (t.status === 'unexpected') {
+                  failed.push({
+                    title: [...path, spec.title].filter(Boolean).join(' › '),
+                    error: (t.results?.[0]?.error?.message ?? 'failed').split('\\n')[0],
+                  });
+                }
               }
             }
-            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
-            NODE
+          }
+          for (const suite of data.suites ?? []) walk(suite, [suite.title]);
+          const lines = ['## LAPS gateway policy failures', ''];
+          if (failed.length === 0) lines.push('All browser policy checks passed.');
+          else for (const item of failed) {
+            lines.push('- **' + item.title + '**');
+            lines.push('  - ' + item.error);
+          }
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\\n') + '\\n');
+          "
           fi
 
       - name: Upload Playwright report
