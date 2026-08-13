@@ -6,11 +6,18 @@ on:
       - "pages-gateway-tests/**"
       - ".github/workflows/laps-gateway-tests.yml"
       - "docs/**"
+      - "src/**"
+      - "public/**"
+      - "package.json"
+      - "next.config.mjs"
   push:
     branches: [main]
     paths:
       - "pages-gateway-tests/**"
       - ".github/workflows/laps-gateway-tests.yml"
+      - "src/**"
+      - "public/**"
+      - "package.json"
   workflow_dispatch:
   schedule:
     - cron: "30 3 * * *"

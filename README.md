@@ -1,9 +1,11 @@
 # b1-site
 
-Public GitHub Pages leaf.
+Science gateway (Next.js static export) for unpublished results.
 
-Live URL (after the first green Pages workflow): https://peterponyu.github.io/b1-site/
+- Live: https://peterponyu.github.io/b1-site/
+- IA: Home / Results / Methods / Evidence / Claims
+- Archive: https://doi.org/10.5281/zenodo.21870002
 
-Archive DOI: https://doi.org/10.5281/zenodo.21870002. No public Code HTTPS.
-
-This repository is the Pages origin only. It does not publish a private workbench.
+```bash
+NEXT_PUBLIC_BASE_PATH=/b1-site npm ci && npm run build && npm run verify
+```
