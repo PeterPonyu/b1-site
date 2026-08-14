@@ -1,6 +1,6 @@
 # b1-site
 
-Science gateway (Next.js static export) for unpublished results.
+Science gateway (Next.js static export) for research code / results.
 
 - Live: https://peterponyu.github.io/b1-site/
 - IA: Home / Results / Methods / Evidence / Claims
