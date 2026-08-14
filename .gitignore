@@ -1,4 +1,31 @@
+# dependencies / build output
 node_modules/
 .next/
 out/
-.env*.local
+
+# environment / credentials
+.env
+.env.*
+!.env.example
+
+# AI assistant / agent process artifacts
+.cursor/
+.cursor.cloud
+.cursorignore
+.omc/
+.omx/
+.claude/
+.codex/
+agent-transcripts/
+*.canvas.tsx
+
+# editor / AI caches
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+.cache/
+.turbo/
+.vercel/
+*.tsbuildinfo
