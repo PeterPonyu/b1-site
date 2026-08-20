@@ -1,22 +1,26 @@
 import PageShell from '@/components/PageShell';
-import { CLAIMS } from '@/lib/site';
+import { PAGE_BINDINGS } from '@/lib/site';
 
-export default function ClaimsPage() {
+/** Unique page module for b1-site Claims.
+ *  pageId b1.page.claims · runner b1.runner.claims-withheld
+ *  data b1.data.claims-withheld · law b1.law.falsifiable-cofolding
+ *  shared chrome.page-shell
+ */
+const CLAIMS_BIND = PAGE_BINDINGS.claims;
+
+export default function B1ClaimsPage() {
   return (
-    <PageShell title="Claims" kicker="Falsifiable statements">
-      <div className="space-y-6">
-        {CLAIMS.map((item) => (
-          <article key={item.claim} className="rounded-2xl border border-slate-200 bg-white/80 p-6">
-            <h2 className="text-lg font-semibold text-slate-900">{item.claim}</h2>
-            <p className="mt-2 text-sm text-slate-600">
-              <strong>Scope:</strong> {item.scope}
-            </p>
-            <p className="mt-2 text-sm text-slate-500">
-              <strong>Would refute:</strong> {item.refutation}
-            </p>
-          </article>
-        ))}
-      </div>
+    <PageShell title="Claims" kicker="Cofolding reliability statements">
+      <p>
+        Falsifiable statements for this cofolding-confidence object are not posted on this leaf.
+        Article DOI remains disabled until acceptance.
+      </p>
+      <p className="text-xs text-slate-500">
+        Out of scope: journal venue packaging, invented article DOI, or a product headline.
+      </p>
+      <p className="sr-only" data-page-id={CLAIMS_BIND.pageId}>
+        {CLAIMS_BIND.pageId}
+      </p>
     </PageShell>
   );
 }

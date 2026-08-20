@@ -70,6 +70,43 @@ if (existsSync(out)) {
   }
 }
 
+const leakPatterns = [
+  [/unpublished results/i, 'unpublished-results framing'],
+  [/\bSOTA\b/, 'SOTA'],
+  [/0\.15\s*Å/i, 'ligand RMSD value'],
+  [/6\.3\s*Å/, 'ligand RMSD value'],
+  [/15\.6\s*Å/, 'ligand RMSD value'],
+  [/\bn=182\b/, 'scoped n'],
+  [/F1_four_panel/, 'unpublished figure asset'],
+  [/F_case_study/, 'unpublished figure asset'],
+  [/8e5i/i, 'case identifier'],
+  [/8og8/i, 'case identifier'],
+  [/8q0u/i, 'case identifier'],
+];
+
+function walkHtml(dir) {
+  if (!existsSync(dir)) return;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const p = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      walkHtml(p);
+      continue;
+    }
+    if (!entry.name.endsWith('.html') && !entry.name.endsWith('.txt')) continue;
+    const body = readFileSync(p, 'utf8');
+    for (const [pattern, label] of leakPatterns) {
+      if (pattern.test(body)) {
+        console.error(`FAIL leak: ${label} in ${p}`);
+        failed += 1;
+      }
+    }
+  }
+}
+
+if (existsSync(out)) {
+  walkHtml(out);
+}
+
 if (failed) {
   process.exit(1);
 }
