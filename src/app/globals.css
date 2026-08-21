@@ -1,50 +1,254 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* b1 pose-ledger: indigo rule on cool gray, IBM Plex. Not the shared gateway sheet. */
 :root {
-  --bg: #f8fafc;
-  --text-h: #0f172a;
-  --text: #334155;
-  --brand: #2563eb;
-  --teal: #0d9488;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --pose-bg: #eef0f6;
+  --pose-ink: #1e1b4b;
+  --pose-muted: #4338ca;
+  --pose-rule: #3730a3;
+  --pose-card: #f8f7ff;
+  --pose-line: #c7d2fe;
+  --font-pose: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --font-pose-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
 @layer base {
   html {
-    font-family: var(--font-sans);
+    font-family: var(--font-pose);
   }
 
-  body {
-    background: var(--bg);
-    color: var(--text-h);
+  body.pose-ledger {
+    background: var(--pose-bg);
+    color: var(--pose-ink);
+    border-left: 7px solid var(--pose-rule);
+    min-height: 100vh;
     overflow-x: hidden;
   }
 
   code,
   pre,
   .font-mono {
-    font-family: var(--font-mono);
+    font-family: var(--font-pose-mono);
   }
 }
 
-@layer utilities {
-  .card-hover {
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
+.pose-head {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #f8f7ffee;
+  border-bottom: 1px solid var(--pose-line);
+}
+
+.pose-head-row {
+  margin: 0 auto;
+  max-width: 70rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.7rem 1.1rem;
+}
+
+.pose-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--pose-ink);
+  text-decoration: none;
+}
+
+.pose-mark-box {
+  display: inline-flex;
+  height: 2rem;
+  width: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  background: var(--pose-rule);
+  color: #eef2ff;
+  font-family: var(--font-pose-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.pose-nav {
+  display: none;
+  gap: 0.2rem;
+}
+
+.pose-nav a {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #312e81;
+  text-decoration: none;
+}
+
+.pose-nav a.is-on,
+.pose-nav a:hover {
+  background: #e0e7ff;
+  color: var(--pose-rule);
+}
+
+.pose-chips {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pose-chip,
+.pose-chip-off {
+  border: 1px solid var(--pose-line);
+  padding: 0.28rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #4338ca;
+  text-decoration: none;
+}
+
+.pose-chip-off {
+  border-style: dashed;
+  color: #818cf8;
+  cursor: not-allowed;
+}
+
+.pose-menu {
+  border: 1px solid var(--pose-line);
+  background: transparent;
+  padding: 0.35rem 0.7rem;
+  font-weight: 600;
+}
+
+.pose-mobile {
+  display: none;
+  border-top: 1px solid var(--pose-line);
+  padding: 0.75rem 1.1rem 1rem;
+}
+
+.pose-mobile.is-open {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.pose-wrap {
+  margin: 0 auto;
+  max-width: 46rem;
+  padding: 2.2rem 1.1rem 3rem;
+}
+
+.pose-kicker {
+  font-family: var(--font-pose-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pose-muted);
+}
+
+.pose-title {
+  margin: 0.4rem 0 0;
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.pose-lead {
+  margin-top: 0.9rem;
+  color: #312e81;
+  line-height: 1.55;
+}
+
+.pose-box {
+  margin-top: 1.4rem;
+  background: var(--pose-card);
+  border: 1px solid var(--pose-line);
+  padding: 1.05rem 1.15rem;
+}
+
+.pose-box h2 {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pose-muted);
+}
+
+.pose-box p,
+.pose-box ul {
+  margin: 0.55rem 0 0;
+}
+
+.pose-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.pose-card {
+  display: flex;
+  gap: 0.85rem;
+  background: var(--pose-card);
+  border: 1px solid var(--pose-line);
+  padding: 0.95rem 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pose-card:hover {
+  border-color: var(--pose-rule);
+}
+
+.pose-num {
+  flex: 0 0 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pose-rule);
+  color: #eef2ff;
+  font-family: var(--font-pose-mono);
+  font-size: 0.75rem;
+}
+
+.pose-foot {
+  margin-top: auto;
+  border-top: 1px solid var(--pose-line);
+  background: #f8f7ff;
+  color: #4338ca;
+  font-size: 0.8rem;
+}
+
+.pose-foot-row {
+  margin: 0 auto;
+  max-width: 70rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.1rem;
+  padding: 0.85rem 1.1rem;
+}
+
+.pose-foot a {
+  color: #3730a3;
+}
+
+@media (min-width: 1024px) {
+  .pose-nav,
+  .pose-chips {
+    display: flex;
   }
 
-  .card-hover:hover {
-    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.12);
-    transform: translateY(-1px);
+  .pose-menu,
+  .pose-mobile {
+    display: none !important;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .card-hover:hover {
-      transform: none;
-    }
+  .pose-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
