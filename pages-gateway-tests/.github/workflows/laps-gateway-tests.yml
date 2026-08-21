@@ -1,34 +1,14 @@
-name: Gateway policy (browser)
+name: B1 Pages landing policy
 
 on:
-  pull_request:
-    paths:
-      - "pages-gateway-tests/**"
-      - ".github/workflows/laps-gateway-tests.yml"
-      - "docs/**"
-  push:
-    branches: [main]
-    paths:
-      - "pages-gateway-tests/**"
-      - ".github/workflows/laps-gateway-tests.yml"
   workflow_dispatch:
-  schedule:
-    - cron: "30 3 * * *"
-  workflow_run:
-    workflows:
-      - "Deploy GitHub Pages"
-    types:
-      - completed
 
 permissions:
   contents: read
 
 jobs:
-  laps-gateway-browser-gate:
-    name: Science gateway (Playwright)
-    if: >
-      github.event_name != 'workflow_run' ||
-      github.event.workflow_run.conclusion == 'success'
+  b1-pages-landing-gate:
+    name: B1 Pages landing (Playwright)
     runs-on: ubuntu-latest
     timeout-minutes: 30
     defaults:
@@ -37,59 +17,15 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: "24"
           cache: npm
           cache-dependency-path: pages-gateway-tests/package-lock.json
-
       - name: Install dependencies
         run: npm ci
-
       - name: Install Playwright Chromium
         run: npx playwright install chromium --with-deps
-
-      - name: Run gateway policy suite
+      - name: Run B1 landing policy suite
         run: npm test
-
-      - name: Summarize failures
-        if: always()
-        run: |
-          if [ -f test-results/results.json ]; then
-            node - <<'NODE'
-            import fs from 'node:fs';
-            const data = JSON.parse(fs.readFileSync('test-results/results.json', 'utf8'));
-            const failed = (data.suites ?? []).flatMap(function walk(suite) {
-              const nested = (suite.suites ?? []).flatMap(walk);
-              const specs = (suite.specs ?? []).flatMap((spec) =>
-                (spec.tests ?? []).filter((t) => t.status === 'unexpected').map((t) => ({
-                  title: [...(spec.titlePath ?? []), spec.title].filter(Boolean).join(' › '),
-                  error: t.results?.[0]?.error?.message ?? 'failed',
-                })),
-              );
-              return nested.concat(specs);
-            });
-            const lines = ['## Gateway policy failures', ''];
-            if (failed.length === 0) {
-              lines.push('All browser policy checks passed.');
-            } else {
-              for (const item of failed) {
-                lines.push(`- **${item.title}**`);
-                lines.push(`  - ${String(item.error).split('\n')[0]}`);
-              }
-            }
-            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
-            NODE
-          fi
-
-      - name: Upload Playwright report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: laps-gateway-playwright-report
-          path: |
-            pages-gateway-tests/playwright-report/
-            pages-gateway-tests/test-results/
-          if-no-files-found: warn

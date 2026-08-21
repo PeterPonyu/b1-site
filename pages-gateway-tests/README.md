@@ -1,18 +1,21 @@
-# LAPS Pages gateway tests (Playwright)
+# b1-site Pages landing tests (Playwright)
 
-Browser policy gate for the GitHub Pages science gateways. Fails CI on submission packaging, marketing splash H1, missing series chrome, horizontal overflow, private GitHub hrefs, and invented article DOIs.
+Browser policy gate for **this repo's** GitHub Pages leaf only (`https://peterponyu.github.io/b1-site/`). It does **not** crawl sibling paper sites.
 
-## Policy (fail-closed)
+Daily `cron: 30 3 * * *` was dropped: this leaf is static, post-deploy coverage is `workflow_run` after **Deploy GitHub Pages**, and the old schedule was mailing failures from sibling-site chrome assertions.
+
+## Contract
 
 | Check | Rule |
 |---|---|
-| Submission packaging | No venue-intended, under review, PeerJ/JPR/JCIM/bioRxiv **as submission**, or BibTeX kits on unpublished leaves |
-| Published exception | scCCVGBen Frontiers `10.3389/fgene.2026.1822168` allowed |
-| Marketing H1 | No product splash headlines |
+| Home | HTTP 200 object+archive leaf |
+| Leak tokens | No unpublished-results framing / SOTA / RMSD Å values / `n=182` / `8e5i` `8og8` `8q0u` / unpublished figure filenames |
+| Stub routes | `/results/` `/methods/` `/evidence/` `/claims/` stay HTTP 200 with no restored numbers or figures |
+| Figures | `/media/F1_four_panel.png` and `/media/F_case_study.png` stay 404 |
 | Chrome | Sticky header with Homepage + SCPortal |
 | Layout | No horizontal overflow on Home @ 1280 and 390 |
-| Links | No `href` to private GitHub repos that 404 anonymously |
-| DOI | No invented journal DOI; Zenodo archives OK |
+| Packaging | No venue-intended / under review / BibTeX kit |
+| Links | Public `PeterPonyu/b1-site`; no HetCLOP href; Zenodo archive OK; no invented article DOI |
 
 ## Run locally
 
@@ -22,11 +25,3 @@ npm ci
 npx playwright install chromium
 npm test
 ```
-
-## Copy into a Pages repo
-
-1. Copy this directory to `<pages-repo>/pages-gateway-tests/`.
-2. Copy `.github/workflows/laps-gateway-tests.yml` to `<pages-repo>/.github/workflows/`.
-3. Push — workflow runs on PR/push, daily schedule, after Pages deploy, or manual dispatch.
-
-The canonical copy lives under `labs/pages-gateway-tests/`. `b1-site` hosts the live Actions run for the series.
